@@ -6,12 +6,13 @@
   </head>
   <body>
     <h1>PICTURES</h1>
-    {% for picture in pictures %}
       <p> {{picture.title}} </p>
       <p> By {{picture.artist}}</p>
       <li><img src="{{picture.url}}" alt=""></li>
       <p>Comments: {{ picture.comments.count }}</p>
-    {% endfor %}
+      {% for comment in comments%}
+        <li>On {{ comment.created_at }} => {{ comment.message }}. -{{ comment.name }}</li>
+      {% endfor %}
 
   </body>
 </html>
