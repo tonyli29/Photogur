@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>PICTURES</title>
-  </head>
-  <body>
+  {% extends 'base.html' %}
+  {% block content %}
     {% for picture in pictures %}
       <h2>{{ picture.title }}</h2>
       <p>by {{ picture.artist }}</p>
@@ -15,5 +10,4 @@
       </a>
       <p>Comments: {{ picture.comments.count }}</p>
     {% endfor %}
-  </body>
-</html>
+  {% endblock %}
