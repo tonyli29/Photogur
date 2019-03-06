@@ -1,13 +1,17 @@
-  {% extends 'base.html' %}
-  {% block content %}
-    {% for picture in pictures %}
-      <h2>{{ picture.title }}</h2>
-      <p>by {{ picture.artist }}</p>
+{% extends 'base.html' %}
+{% block content %}
+  {% for picture in pictures %}
+    <div class="photo-box">
       <a href="{% url 'picture_details' id=picture.pk %}">
         <li>
-          <img src="{{picture.url}}" alt="">
+          <img class="image" src="{{picture.url}}" alt="">
         </li>
       </a>
-      <p>Comments: {{ picture.comments.count }}</p>
-    {% endfor %}
-  {% endblock %}
+      <div class="info">
+        <h2>{{ picture.title }}</h2>
+        <h3>by {{ picture.artist }}</h3>
+        <h3>Comments: {{ picture.comments.count }}</h3>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock %}
