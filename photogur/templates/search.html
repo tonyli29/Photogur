@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Search Results: <span class="search-count">{{ pictures.count }}</span></h1>
+<div class="search-count">
+  <h1>Search Results: <span class="search-count">{{ pictures.count }}</span></h1>
+</div>
+<div class="main-layout">
   {% for picture in pictures %}
-    <li>
-    <img class="picture-image" src="{{ picture.url }}" alt="{{ picture.title }}" />
-    <p>{{ picture.title }} By {{ picture.artist }}</p>
-    </li>
-
+    <div class="photo-box">
+      <li>
+      <img class="image" src="{{ picture.url }}" alt="{{ picture.title }}" />
+      </li>
+      <div class="info">
+        <h2>{{ picture.title }}</h2>
+        <h3>by {{ picture.artist }}</h3>
+        <h3>Comments: {{ picture.comments.count }}</h3>
+      </div>
+    </div>
   {% endfor %}
+</div>
 {% endblock %}

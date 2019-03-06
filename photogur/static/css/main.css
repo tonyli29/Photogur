@@ -63,3 +63,6 @@ footer {
 span {
   font-size: 0.5em;
 }
+.search-count {
+  display: inline;
+}
