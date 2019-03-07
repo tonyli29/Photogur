@@ -6,9 +6,11 @@
 <div class="main-layout">
   {% for picture in pictures %}
     <div class="photo-box">
-      <li>
-      <img class="image" src="{{ picture.url }}" alt="{{ picture.title }}" />
-      </li>
+      <a href="{% url 'picture_details' id=picture.pk %}">
+        <li>
+          <img class="individual-image" src="{{ picture.url }}" alt="{{ picture.title }}" />
+        </li>
+      </a>
       <div class="info">
         <h2>{{ picture.title }}</h2>
         <h3>by {{ picture.artist }}</h3>

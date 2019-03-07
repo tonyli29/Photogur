@@ -4,15 +4,22 @@
   margin: 0;
   padding: 0;
 }
+html {
+  height: 100%;
+}
 body {
   padding: 10px;
   font-family: 'Montserrat', sans-serif;
+  position: relative;
+  height: 100%;
 }
 header {
   color: #94989e;
   font-size: 2em;
   margin: auto;
   font-weight: bold;
+  border-bottom: 1px solid;
+  margin-bottom: 10px;
 }
 .main-header a:visited {
   color: #94989e;
@@ -38,11 +45,15 @@ li {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
-
+  border-bottom: 1px solid #94989e;
+  padding-bottom: 10px;
 }
 footer {
   position: absolute;
   bottom: 0;
+  width: 100%;
+  text-align: center;
+  background: #94989e;
 }
 .photo-box {
   display: inline-block;
@@ -50,6 +61,16 @@ footer {
   box-sizing: content-box;
   border: 1px solid #94989e;
   padding: 10px;
+}
+.title h3 {
+  padding-bottom: 5px;
+  color: #94989e;
+  font-size: 0.75em;
+}
+.title h2 {
+  font-size: 1.75em;
+  padding-bottom: 10px;
+  font-weight: 700;
 }
 .info {
   font-size: 1em;
@@ -63,6 +84,39 @@ footer {
 span {
   font-size: 0.5em;
 }
+.comment-count {
+  margin-top: 10px;
+}
 .search-count {
   display: inline;
+}
+.comment-section li {
+  display: block;
+  line-height: 2;
+  border-bottom: 1px dotted #94989e;
+}
+.comment-section ul {
+  border: solid #94989e;
+  padding: 10px;
+  border-width: 1px;
+  margin: 10px 0;
+}
+.comment-section li h3 {
+  font-size: 0.75em;
+  font-weight: 700;
+}
+.comment-section li h3 span{
+  font-size: 0.5em;
+  color: #94989e;
+  font-weight: 400;
+}
+.comment-section li h4 {
+  font-size: 0.75em;
+}
+.photo-box li img {
+  width: 100%;
+}
+.individual-image img {
+  width: 100%;
+  height: auto;
 }
