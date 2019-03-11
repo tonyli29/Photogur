@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from photogur.models import Picture, Comment
+from photogur.forms import LoginForm
 
 import datetime
 
@@ -37,6 +38,15 @@ def create_comment(request):
     comment_message = request.POST['comment_message']
     new_comment = Comment.objects.create(name=comment_name, message=comment_message, picture=Picture.objects.get(pk=picture))
     return HttpResponseRedirect('/pictures/' + picture)
+
+def login_view(request):
+    form = LoginForm()
+    context = {
+        'form': form
+    }
+    response = render(request, 'login.html', context)
+    return HttpResponse(response)
+
 
 
 
