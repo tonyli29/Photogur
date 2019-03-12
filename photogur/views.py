@@ -4,6 +4,7 @@ from photogur.models import Picture, Comment
 from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -16,6 +17,7 @@ def pics(request):
     response = render(request, 'pictures.html', context)
     return HttpResponse(response)
 
+@login_required
 def picture_show(request, id):
     picture = Picture.objects.get(pk=id)
     comments = picture.comments.all()
@@ -25,6 +27,7 @@ def picture_show(request, id):
     }
     response = render(request, 'picture.html', context)
     return HttpResponse(response)
+
 
 def picture_search(request):
     query = request.GET['query']
@@ -36,6 +39,7 @@ def picture_search(request):
     response = render(request, 'search.html', context)
     return HttpResponse(response)
 
+@login_required
 def create_comment(request):
     picture = request.POST['picture']
     comment_name = request.POST['comment_name']
