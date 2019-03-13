@@ -1,0 +1,11 @@
+<h1>hl</h1>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Edit Picture</h1>
+<img src="{{picture.url}}" alt="">
+<form class="edit_picture" action="{% url 'edit_picture' id=picture.pk %}" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" name="button">Done</button>
+</form>
+{% endblock %}

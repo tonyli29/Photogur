@@ -5,6 +5,9 @@
     <h3> By {{picture.artist}} </h3>
     <h3> Added by {{ picture.user }}</h3>
   </div>
+  <div class="edit_button">
+    <a href="{% url 'edit_picture' id=picture.pk %}">Edit</a>
+  </div>
   <div class="individual-image">
     <li>
       <img src="{{picture.url}}" alt="">

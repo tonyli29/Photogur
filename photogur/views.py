@@ -5,6 +5,8 @@ from photogur.forms import LoginForm, PictureForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, get_object_or_404
+
 
 
 
@@ -86,6 +88,7 @@ def signup(request):
     html_response =  render(request, 'signup.html', {'form': form})
     return HttpResponse(html_response)
 
+@login_required
 def new_picture(request):
     if request.method == 'POST':
         form = PictureForm(request.POST)
@@ -98,6 +101,19 @@ def new_picture(request):
         form = PictureForm()
     html_response =  render(request, 'new_picture.html', {'form': form})
     return HttpResponse(html_response)
+
+def edit_picture(request, id):
+    picture = get_object_or_404(Picture, pk=id, user=request.user.pk)
+    form = PictureForm(request.POST or None, instance=picture)
+    if form.is_valid():
+        picture = form.save(commit=False)
+        picture.save()
+        return HttpResponseRedirect('/pictures/')
+    context = {
+        'form': form,
+        'picture': picture
+    }
+    return render(request, 'edit.html', context)
 
 
 

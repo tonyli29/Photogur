@@ -20,6 +20,7 @@ header {
   font-weight: bold;
   border-bottom: 1px solid;
   margin-bottom: 10px;
+  display: inline-block;
 }
 .main-header a:visited {
   color: #94989e;
