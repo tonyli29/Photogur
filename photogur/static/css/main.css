@@ -49,19 +49,23 @@ li {
   border-bottom: 1px solid #94989e;
   padding-bottom: 10px;
 }
-footer {
+/* footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   text-align: center;
   background: #94989e;
-}
+} */
 .photo-box {
   display: inline-block;
   display: inline-block;
   box-sizing: content-box;
   border: 1px solid #94989e;
-  padding: 10px;
+  padding: 0px;
+}
+.info {
+  padding: 0 10px 10px 10px;
+  background: #94989e;
 }
 .title h3 {
   padding-bottom: 5px;
@@ -91,6 +95,8 @@ span {
 .search-count {
   display: inline;
 }
+
+
 .comment-section li {
   display: block;
   line-height: 2;
@@ -113,7 +119,41 @@ span {
 }
 .comment-section li h4 {
   font-size: 0.75em;
+  display: inline-block;
 }
+.comment-section li a {
+  float: right;
+  font-size: 0.75em;
+  color: #94989e;
+}
+.comment-section li a:visited {
+  color: #94989e;
+}
+.comment-section li a:hover {
+  color: red;
+}
+.comment-section li a:link {
+  text-decoration: none;
+}
+
+.comment-post {
+  margin: 0 10px;
+}
+.comment-post form p textarea {
+  width: 680px;
+  height: 16px; 
+  resize: none;
+  border: none;
+  border-bottom: 1px solid;
+  outline: none;
+}
+.comment-post form p textarea::placeholder {
+  color: #94989e;
+}
+.comment-post form p input {
+  padding: 10px;
+}
+
 .photo-box li img {
   width: 100%;
 }

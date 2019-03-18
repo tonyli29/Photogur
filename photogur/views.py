@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from photogur.models import Picture, Comment
-from photogur.forms import LoginForm, PictureForm
+from photogur.forms import LoginForm, PictureForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -19,16 +19,46 @@ def pics(request):
     response = render(request, 'pictures.html', context)
     return HttpResponse(response)
 
-@login_required
 def picture_show(request, id):
     picture = Picture.objects.get(pk=id)
     comments = picture.comments.all()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save()
+            return HttpResponseRedirect('/pictures/{}'.format(id))
+        else:
+            pass #some error
+    else:
+        comment_form = CommentForm(initial={'picture': id, 'user': request.user, 'name': 'placeholder'})
     context = {
         'picture': picture,
-        'comments': comments
+        'comments': comments,
+        'comment_form': comment_form
     }
     response = render(request, 'picture.html', context)
     return HttpResponse(response)
+
+# def project_show(request, id):
+#     project = Project.objects.get(pk=id)
+#     reward = project.rewards.all()
+#     if request.method == 'POST':
+#         rewards_form = RewardsForm(request.POST)
+#         if rewards_form.is_valid():
+#             new_reward = rewards_form.save()
+#             return HttpResponseRedirect('/projects/{}'.format(id))
+#         else:
+#             # put some errors
+#             pass
+#     else:
+#         rewards_form = RewardsForm(initial={'project': id})
+#     context = {
+#         'project': project,
+#         'reward': reward,
+#         'rewards_form': rewards_form
+#     }
+#     response = render(request, 'projectshow.html', context)
+#     return HttpResponse(response)
 
 
 def picture_search(request):
@@ -40,14 +70,6 @@ def picture_search(request):
     }
     response = render(request, 'search.html', context)
     return HttpResponse(response)
-
-@login_required
-def create_comment(request):
-    picture = request.POST['picture']
-    comment_name = request.POST['comment_name']
-    comment_message = request.POST['comment_message']
-    new_comment = Comment.objects.create(name=comment_name, message=comment_message, picture=Picture.objects.get(pk=picture))
-    return HttpResponseRedirect('/pictures/' + picture)
 
 def login_view(request):
     if request.method == 'POST':
@@ -86,7 +108,7 @@ def signup(request):
     else:
         form = UserCreationForm()
     html_response =  render(request, 'signup.html', {'form': form})
-    return HttpResponse(html_response)
+    return HttpResponse(html_response) 
 
 @login_required
 def new_picture(request):
@@ -115,6 +137,15 @@ def edit_picture(request, id):
     }
     return render(request, 'edit.html', context)
 
+def delete_picture(request, id):
+    picture = get_object_or_404(Picture, pk=id, user=request.user.pk)
+    picture.delete()
+    return HttpResponseRedirect('/pictures/')
+    
+def delete_comment(request, id):
+	comment = get_object_or_404(Comment, pk=id, user=request.user.pk)
+	comment.delete()
+	return HttpResponseRedirect('/pictures/')
 
 
 

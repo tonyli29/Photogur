@@ -5,36 +5,43 @@
     <h3> By {{picture.artist}} </h3>
     <h3> Added by {{ picture.user }}</h3>
   </div>
-  <div class="edit_button">
-    <a href="{% url 'edit_picture' id=picture.pk %}">Edit</a>
+  <div class="buttons">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'edit_picture' id=picture.pk %}">Edit</a>
+        <a href="{% url 'delete_picture' id=picture.pk %}">Delete</a>
+      {% else %}
+     
+      {% endif %}
   </div>
   <div class="individual-image">
     <li>
       <img src="{{picture.url}}" alt="">
     </li>
   </div>
-    <h1 class="comment-count">Comments: {{ picture.comments.count }}</h1>
-    <div class="comment-section">
-      <ul>
-        {% for comment in comments%}
-          <li>
-            <h3>{{ comment.name }} - <span>{{ comment.created_at }}</span></h3>
-            <h4>{{ comment.message }}.</h4>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-    <form action="{% url 'create_comment' %} "class="comment-section" action="" method="post">
+  <h1 class="comment-count">Comments: {{ picture.comments.count }}</h1>
+  <div class="comment-section">
+    <ul>
+      {% for comment in comments %}
+        <li>
+          <h3>{{ comment.user }} - <span>{{ comment.created_at }}</span></h3>
+          <h4>{{ comment.message }}.</h4>
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'delete_comment' id=comment.pk %}">Delete</a>
+          {% else %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="comment-post">
+    <form action="{% url 'picture_details' id=picture.pk %}" method="post">
       {% csrf_token %}
-      <input type="hidden" name="picture" value="{{ picture.pk }}">
-      <label for="comment_name">
-        <span>Name:</span>
-        <input type="text" name="comment_name" value="">
-      </label>
-      <label for="comment_message">
-        <span>Message:</span>
-        <textarea id="comment-message" name="comment_message"></textarea>
-      </label>
-      <button type="submit" name="button">Submit</button>
+      <p>
+        <textarea placeholder="Add comment..." name="message" cols="40" rows="5" required="" id="id_message"></textarea>
+        <input type="hidden" name="name" value="placeholder" id="id_name">
+        <input type="hidden" name="picture" value="2" id="id_picture"><input type="hidden" name="user" value="1" id="id_user">
+      </p>
+      <input type="submit" name="Add" id="">
     </form>
-{% endblock %}
+  </div>
+  {% endblock %}
