@@ -6,12 +6,14 @@
 }
 html {
   height: 100%;
+  background: #2e3035;
 }
 body {
   padding: 10px;
   font-family: 'Montserrat', sans-serif;
   position: relative;
   height: 100%;
+  color: #f2f2f2;
 }
 header {
   color: #94989e;
@@ -21,16 +23,50 @@ header {
   border-bottom: 1px solid;
   margin-bottom: 10px;
   display: inline-block;
+  padding-bottom: 15px;
 }
+
+
+.main-header {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+.main-header h1 {
+  display: inline-block;
+}
+.main-header .search {
+  display: inline-block;
+}
+.main-header .login_out {
+  display: inline-block;
+  float: right;
+}
+
+.main-header .login_out input {
+  height: 39px;
+  padding: 0 20px;
+  border-radius: 15px;
+  background-color: #1e905b;
+  border: none;
+  font-weight: 600;
+  color: #f2f2f2;
+}
+.main-header .login_out input:hover {
+  background-color: #349e6c;
+  cursor: pointer;
+}
+.main-header .login_out form {
+  display: inline-block;
+}
+
 .main-header a:visited {
   color: #94989e;
 }
 .main-header a:link {
   text-decoration: none;
 }
-form {
-  padding-bottom: 10px;
-}
+
 .image {
   display: grid;
   grid-column: 1fr;
@@ -60,12 +96,16 @@ li {
   display: inline-block;
   display: inline-block;
   box-sizing: content-box;
-  border: 1px solid #94989e;
   padding: 0px;
+  background-color: #474a51;
+  border-radius: 15px;
+}
+.photo-box li img {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
 }
 .info {
   padding: 0 10px 10px 10px;
-  background: #94989e;
 }
 .title h3 {
   padding-bottom: 5px;
